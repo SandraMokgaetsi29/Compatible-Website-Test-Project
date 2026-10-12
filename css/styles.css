@@ -103,7 +103,7 @@ ul { padding-left: 1.2em; }
 .section--brand .btn--ghost { background: transparent; color: #fff; border-color: var(--line-strong); }
 .section--brand .btn--ghost:hover { border-color: #fff; }
 .section--brand .ph { color: #ffc20e; border-color: #ffc20e; }
-.section--brand .badge { background: rgba(255, 255, 255, .08); color: #fff; }
+.section--brand .form-card .ph { color: var(--purple); border-color: var(--purple); }.section--brand .badge { background: rgba(255, 255, 255, .08); color: #fff; }
 .section--brand .breadcrumb a:hover { color: var(--orange); }
 .section--brand .tl-item b, .section--brand .case dt { color: var(--orange); }
 .section--brand .case-top { background: rgba(255, 255, 255, .06); }
@@ -121,6 +121,7 @@ ul { padding-left: 1.2em; }
   background: var(--orange); /* navy text: white on this orange is too faint */
   color: var(--text);
 }
+.section--brand .form-card,
 .section--pink .card, .section--orange .card {
   --text: var(--navy); --text-2: color-mix(in srgb, #161138 80%, #fff);   /* navy tints */ --text-3: color-mix(in srgb, #161138 65%, #fff);
   --line: rgba(22, 17, 56, .09); --line-strong: rgba(22, 17, 56, .16);
