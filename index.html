@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20261012n">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -19,9 +19,14 @@
 
   <!-- Hero -->
   <section class="hero">
-    <!-- Hero photo: assets/hero.jpg (landscape, at least 2000px wide, subject on the right).
-         Current image: Unsplash photo kjWIILfGkOY (showroom sales floor), blurred so no brands are visible (Unsplash License). -->
-    <div class="hero-bg" aria-hidden="true"><img class="hero-photo" src="assets/hero.jpg" alt=""></div>
+    <!-- Hero video: assets/hero.mp4 with still frame assets/hero-poster.jpg (shown while loading).
+         Current clip: Mixkit "Red sports car" (74), Mixkit free licence.
+         Softened in CSS; no car badge is visible in the clip. -->
+    <div class="hero-bg" aria-hidden="true">
+      <video class="hero-photo hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+        <source src="assets/hero.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="container hero-content">
       <h1 class="hero-title">Driving Change in African Automotive.</h1>
       <p class="hero-sub">Technology that moves automotive forward.</p>
@@ -29,6 +34,7 @@
       <div class="btn-row">
         <a href="contact.html" class="btn btn--white">Talk to us <span data-icon="chevron"></span></a>
         <a href="solutions.html" class="hero-link">Explore our solutions</a>
+        <button type="button" class="hero-pause" id="heroPause" aria-controls="heroVideo" aria-pressed="false"><span class="hero-pause-icon" aria-hidden="true"></span><span class="hero-pause-label">Pause video</span></button>
       </div>
     </div>
     <a href="#dealership" class="hero-scroll" aria-label="Scroll to next section"><span data-icon="chevron"></span></a>
@@ -68,40 +74,48 @@
     </div>
   </section>
 
-  <!-- Solution categories -->
-  <section class="section section--indigo">
+  <!-- ============ SOLUTIONS ============ -->
+  <section class="section section--indigo" id="solutions">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Our solutions</span>
-        <h2>Built around how dealerships actually work.</h2>
-        <p class="lead">From the workshop floor to the first online search, we bring together the technology automotive businesses need to perform better.</p>
+        <span class="eyebrow">What we do</span>
+        <h2>One connected platform for the <span class="accent-text">modern dealership.</span></h2>
+        <p class="lead">We deliver through technology, innovation and people. Our tools cover the whole customer journey, from the first online lead to the hundredth service visit.</p>
       </div>
-      <div class="grid grid-4">
+
+      <div class="grid grid-3">
         <article class="card card--glow reveal">
-          <span class="ico" data-icon="cog"></span>
-          <h3>Dealership Technology</h3>
-          <ul><li>Dealer Management Systems</li><li>Stock management</li><li>Parts &amp; service</li><li>Vehicle sales</li><li>Reporting</li></ul>
-          <a class="link-arrow" href="solutions.html#dealership">Explore</a>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z"/></svg></span>
+          <h3>Dealership Management Systems</h3>
+          <p>A central hub for sales, service and finance, updated in real time so every department works from the same data.</p>
         </article>
         <article class="card card--glow reveal">
-          <span class="ico" data-icon="globe"></span>
-          <h3>Digital</h3>
-          <ul><li>Dealer websites</li><li>Digital marketing</li><li>SEO</li><li>Social media</li><li>Lead generation</li></ul>
-          <a class="link-arrow" href="solutions.html#digital">Explore</a>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7l8-4 8 4v10l-8 4-8-4zM4 7l8 4 8-4M12 11v10"/></svg></span>
+          <h3>Enhanced Inventory Management</h3>
+          <p>Monitor stock, automate ordering and forecast demand so you hold the right vehicles and parts at the right time.</p>
         </article>
         <article class="card card--glow reveal">
-          <span class="ico" data-icon="users"></span>
-          <h3>Customer Experience</h3>
-          <ul><li>CRM</li><li>Customer communication</li><li>Lead management</li><li>Online enquiries</li><li>Automated communication</li></ul>
-          <a class="link-arrow" href="solutions.html#customer">Explore</a>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0"/></svg></span>
+          <h3>Customer Relationship Management</h3>
+          <p>Predictive CRM that tracks leads, interactions and preferences, and helps your team know who to call next.</p>
         </article>
         <article class="card card--glow reveal">
-          <span class="ico" data-icon="ai"></span>
-          <h3>Innovation</h3>
-          <ul><li>Artificial intelligence</li><li>Vehicle image enhancement</li><li>Automation</li><li>Data &amp; analytics</li><li>OEM integrations</li></ul>
-          <a class="link-arrow" href="solutions.html#innovation">Explore</a>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"/></svg></span>
+          <h3>Digital Marketing Solutions</h3>
+          <p>High-performing dealer websites, SEO and targeted campaigns that bring qualified buyers to your showroom.</p>
+        </article>
+        <article class="card card--glow reveal">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg></span>
+          <h3>Responsive Customer Support</h3>
+          <p>Support portals, chatbots and a dedicated team who know automotive and resolve issues quickly.</p>
+        </article>
+        <article class="card card--glow reveal">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+          <h3>Customer Feedback &amp; Insights</h3>
+          <p>Collect and analyse customer opinions, then turn the results into decisions that lift satisfaction and retention.</p>
         </article>
       </div>
+      <p style="margin-top:32px" class="reveal"><a class="link-arrow" href="solutions.html">Explore all solutions</a></p>
     </div>
   </section>
 
@@ -243,7 +257,7 @@
         <article class="card ai-card reveal"><span class="glow" style="background:var(--orange)"></span><span class="ico" data-icon="target"></span><h3>AI Lead Management</h3><p>Respond to and manage opportunities more effectively.</p></article>
         <article class="card ai-card reveal"><span class="glow" style="background:var(--yellow)"></span><span class="ico" data-icon="chart"></span><h3>AI Insights</h3><p>Turn dealership data into actionable information.</p></article>
       </div>
-      <p style="margin-top:32px" class="reveal"><a class="link-arrow" href="ai.html">Discover AI &amp; Innovation</a></p>
+      <p style="margin-top:32px" class="reveal"><a class="link-arrow" href="products.html#phyron-at-work">See Phyron AI at work</a></p>
     </div>
   </section>
 
@@ -287,6 +301,6 @@
 </main>
 
 <div id="site-footer"></div>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20261012n"></script>
 </body>
 </html>

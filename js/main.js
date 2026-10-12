@@ -74,6 +74,14 @@
     ["solutions.html#roles", "target", "Solutions for your role", "Dealer principals, sales, marketing, aftersales, OEMs"],
     ["solutions.html#oem", "factory", "OEM integrations", "Connect your network with automotive technology"]
   ];
+  const megaProducts = [
+    ["products.html#modules", "cog", "Titan DMS", "One platform for your entire dealership"],
+    ["products.html#motordx", "file", "MotorDX", "Paperless deal files, from offer to sign-off"],
+    ["products.html#frontu", "wrench", "Frontu", "Field service management"],
+    ["products.html#easichat", "message", "EasiChat", "24/7 hybrid AI chat for dealerships"],
+    ["products.html#phyron", "ai", "Phyron AI", "AI vehicle imagery and video"],
+    ["products.html#phyron-at-work", "image", "Phyron AI at work", "See a real before and after"]
+  ];
   const megaResources = [
     ["insights.html", "book", "Compatible Insights", "Articles, guides, videos and webinars"],
     ["insights.html#case-studies", "chart", "Case studies", "Real dealerships. Real results."],
@@ -96,12 +104,10 @@
     </a>
     <nav class="main-nav" aria-label="Main">
       <a href="index.html" class="${active("home").trim()}"${current("home")}>Home</a>
-      <div class="nav-item${active("solutions")}"><button type="button" aria-expanded="false">Solutions</button>${megaHTML(megaSolutions)}</div>
-      <a href="products.html" class="${active("products").trim()}"${current("products")}>Products</a>
-      <a href="digital.html" class="${active("digital").trim()}"${current("digital")}>Digital</a>
-      <a href="ai.html" class="${active("ai").trim()}"${current("ai")}>AI &amp; Innovation</a>
-      <div class="nav-item${active("resources")}"><button type="button" aria-expanded="false">Resources</button>${megaHTML(megaResources)}</div>
+      <div class="nav-item${active("solutions")}"><a class="nav-link" href="solutions.html"${current("solutions")}>Solutions</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Solutions menu"></button>${megaHTML(megaSolutions)}</div>
+      <div class="nav-item${active("products")}"><a class="nav-link" href="products.html"${current("products")}>Products</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Products menu"></button>${megaHTML(megaProducts)}</div>
       <a href="about.html" class="${active("about").trim()}"${current("about")}>About Us</a>
+      <a href="about.html#careers">Careers</a>
     </nav>
     <div class="header-actions">
       <a href="support.html#ticket" class="support-link${active("support")}"${current("support")}>Open a Ticket</a>
@@ -174,7 +180,7 @@
         e.stopPropagation();
         const item = btn.parentElement;
         const wasOpen = item.classList.contains("open");
-        header.querySelectorAll(".nav-item.open").forEach((i) => { i.classList.remove("open"); i.firstElementChild.setAttribute("aria-expanded", "false"); });
+        header.querySelectorAll(".nav-item.open").forEach((i) => { i.classList.remove("open"); i.querySelector(".nav-caret").setAttribute("aria-expanded", "false"); });
         if (!wasOpen) { item.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
       });
     });
@@ -273,7 +279,7 @@
         title: "Work smarter. Sell faster.",
         text: "Artificial intelligence and automation that remove admin, improve vehicle presentation and surface the insights that matter.",
         points: ["AI vehicle image enhancement", "Automated marketing and workflows", "Lead intelligence and AI insights"],
-        href: "ai.html" }
+        href: "products.html#phyron-at-work" }
     ];
 
     const R = 40; // radius in % of the container
@@ -290,7 +296,7 @@
       <svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <circle cx="50" cy="50" r="${R}" vector-effect="non-scaling-stroke"/>${lines}
       </svg>
-      <div class="orbit-core"><div><img src="assets/logo-mark.png" alt=""><span>Your connected<br>dealership</span></div></div>
+      <div class="orbit-core" aria-hidden="true"><div class="core-inner"></div></div>
       ${html}`;
 
     const panel = document.getElementById("nodePanel");
@@ -302,6 +308,9 @@
         b.setAttribute("aria-pressed", on);
       });
       orbit.querySelectorAll("line").forEach((l) => l.classList.toggle("on", l.dataset.key === key));
+      const core = orbit.querySelector(".core-inner");
+      core.innerHTML = `<span class="core-ico">${icon(n.icon)}</span><b>${n.label}</b><span>${n.tag}</span>`;
+      core.classList.remove("pop"); void core.offsetWidth; core.classList.add("pop");
       panel.innerHTML = `<div class="fade">
         <span class="ico ico--lg">${icon(n.icon)}</span>
         <p class="tag" style="margin-top:20px">${n.tag}</p>
@@ -326,6 +335,25 @@
       panel.addEventListener("mouseenter", stopAuto, { once: true });
       orbit.addEventListener("focusin", stopAuto, { once: true });
     }
+  }
+
+  /* ---------- Hero background video ---------- */
+  const heroVideo = document.getElementById("heroVideo");
+  if (heroVideo) heroVideo.playbackRate = 2.25; // a little faster, more energetic
+  document.querySelectorAll(".page-video").forEach((v) => { v.playbackRate = 1.75; if (matchMedia("(prefers-reduced-motion: reduce)").matches) v.pause(); });
+  const heroPause = document.getElementById("heroPause");
+  if (heroVideo && heroPause) {
+    const label = heroPause.querySelector(".hero-pause-label");
+    const setPaused = (paused) => {
+      heroPause.setAttribute("aria-pressed", paused);
+      label.textContent = paused ? "Play video" : "Pause video";
+    };
+    heroPause.addEventListener("click", () => {
+      if (heroVideo.paused) { heroVideo.play(); setPaused(false); }
+      else { heroVideo.pause(); setPaused(true); }
+    });
+    // Respect visitors who prefer reduced motion: show the still frame until they press play
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { heroVideo.pause(); heroVideo.removeAttribute("autoplay"); setPaused(true); }
   }
 
   /* ---------- Before / after slider ---------- */

@@ -10,13 +10,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20261012n">
 </head>
 <body data-page="about">
 <div id="site-header"></div>
 
 <main id="main">
-  <section class="page-hero section--brand">
+  <section class="page-hero section--brand page-hero--video">
+    <!-- Background video: Mixkit "Business people at work meeting" (4809), Mixkit free licence -->
+    <div class="hero-bg" aria-hidden="true">
+      <video class="hero-photo page-video" autoplay muted loop playsinline preload="auto" poster="assets/video/about-poster.jpg">
+        <source src="assets/video/about.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="container">
       <p class="breadcrumb"><a href="index.html">Home</a> / About Us</p>
       <span class="eyebrow">About Compatible</span>
@@ -100,16 +106,34 @@
         <h2>Build the future of automotive <span class="accent-text">with us.</span></h2>
         <p class="lead">Join a team where software, data and automotive expertise come together to change how dealerships across Africa work.</p>
       </div>
-      <div class="form-card reveal">
-        <div class="screen-title" style="flex-wrap:wrap;gap:12px"><h3 style="margin:0">Current opportunities</h3><span class="ph">Connect to your recruitment system</span></div>
-        <table class="table" style="margin-top:12px">
-          <thead><tr><th>Role</th><th>Team</th><th>Location</th><th>Type</th></tr></thead>
-          <tbody>
-            <tr><td>[Open role]</td><td>Software</td><td>Johannesburg</td><td>Full-time</td></tr>
-            <tr><td>[Open role]</td><td>Support</td><td>Johannesburg</td><td>Full-time</td></tr>
-            <tr><td>[Open role]</td><td>Compatible Digital</td><td>Johannesburg</td><td>Full-time</td></tr>
-          </tbody>
-        </table>
+      <div class="jobs reveal">
+        <div class="jobs-head">
+          <div>
+            <h3>Current opportunities</h3>
+            <p>Join the team building the technology that dealerships across Africa run on.</p>
+          </div>
+          <span class="ph">Connect to your recruitment system</span>
+        </div>
+        <ul class="job-list">
+          <li class="job">
+            <span class="job-ico" data-icon="cog"></span>
+            <div class="job-main"><h4>[Open role]</h4><span class="job-team">Software</span></div>
+            <div class="job-meta"><span class="job-tag"><span data-icon="pin"></span>Johannesburg</span><span class="job-tag job-tag--type">Full-time</span></div>
+            <a class="btn btn--primary btn--sm job-apply" href="contact.html?topic=General%20Enquiry">Apply <span data-icon="arrow"></span></a>
+          </li>
+          <li class="job">
+            <span class="job-ico" data-icon="headset"></span>
+            <div class="job-main"><h4>[Open role]</h4><span class="job-team">Support</span></div>
+            <div class="job-meta"><span class="job-tag"><span data-icon="pin"></span>Johannesburg</span><span class="job-tag job-tag--type">Full-time</span></div>
+            <a class="btn btn--primary btn--sm job-apply" href="contact.html?topic=General%20Enquiry">Apply <span data-icon="arrow"></span></a>
+          </li>
+          <li class="job">
+            <span class="job-ico" data-icon="megaphone"></span>
+            <div class="job-main"><h4>[Open role]</h4><span class="job-team">Compatible Digital</span></div>
+            <div class="job-meta"><span class="job-tag"><span data-icon="pin"></span>Johannesburg</span><span class="job-tag job-tag--type">Full-time</span></div>
+            <a class="btn btn--primary btn--sm job-apply" href="contact.html?topic=General%20Enquiry">Apply <span data-icon="arrow"></span></a>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -125,6 +149,6 @@
 </main>
 
 <div id="site-footer"></div>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20261012n"></script>
 </body>
 </html>
