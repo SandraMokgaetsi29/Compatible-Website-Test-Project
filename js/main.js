@@ -91,8 +91,8 @@
   const megaResources = [
     ["insights.html", "book", "Compatible Insights", "Articles, guides, videos and webinars"],
     ["insights.html#case-studies", "chart", "Case studies", "Real dealerships. Real results."],
-    ["support.html", "headset", "Support centre", "Knowledge base, tickets and system status"],
-    ["careers.html", "briefcase", "Careers", "Build the future of automotive with us"]
+    ["support.html", "headset", "Support centre", "Knowledge base and support options"],
+    ["training.html", "grad", "Book training", "Upcoming sessions, webinars and training requests"],
   ];
   const megaHTML = (items) =>
     '<div class="mega">' +
@@ -112,6 +112,7 @@
       <a href="index.html" class="${active("home").trim()}"${current("home")}>Home</a>
       <div class="nav-item${active("solutions")}"><a class="nav-link" href="solutions.html"${current("solutions")}>Solutions</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Solutions menu"></button>${megaHTML(megaSolutions)}</div>
       <div class="nav-item${active("products")}"><a class="nav-link" href="products.html"${current("products")}>Products</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Products menu"></button>${megaHTML(megaProducts)}</div>
+      <div class="nav-item${active("resources")}"><a class="nav-link" href="insights.html"${current("resources")}>Resources</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Resources menu"></button>${megaHTML(megaResources)}</div>
       <a href="about.html" class="${active("about").trim()}"${current("about")}>About Us</a>
       <a href="careers.html" class="${active("careers").trim()}"${current("careers")}>Careers</a>
     </nav>
