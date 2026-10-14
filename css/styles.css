@@ -1006,3 +1006,22 @@ ul { padding-left: 1.2em; }
 /* Shorter training form: compact department tiles */
 .dept > span { padding: 16px 10px 14px; }
 .dept-ico { width: 42px; height: 42px; }
+
+/* ---------- Social media buttons ---------- */
+.social { display: flex; gap: 10px; margin-top: 20px; }
+.social-btn {
+  width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: #fff;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14); transition: background .2s, transform .2s, border-color .2s;
+}
+.social-btn svg { width: 19px; height: 19px; }
+.social-btn:hover, .social-btn:focus-visible { background: var(--magenta); border-color: var(--magenta); transform: translateY(-2px); }
+.social-btn--light { color: var(--purple); background: rgba(146, 39, 143, .1); border-color: transparent; }
+.social-btn--light:hover, .social-btn--light:focus-visible { color: #fff; background: var(--purple); border-color: var(--purple); }
+.contact-follow { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 24px; }
+.contact-follow span { font-weight: 700; color: var(--navy); margin-right: 4px; }
+/* Bright photos (e.g. Careers) need a deeper wash behind the headline */
+.page-hero--bright .hero-bg::after {
+  background: linear-gradient(90deg, rgba(22, 17, 56, .94) 0%, rgba(22, 17, 56, .82) 45%, rgba(41, 38, 110, .45) 72%, rgba(41, 38, 110, .2) 100%);
+}
+/* Steady video: no zoom/pan drift, so handheld footage doesn't look shaky */
+.page-hero--video .page-video--steady { animation: none; transform: none; }

@@ -4,24 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Support | Compatible Automotive</title>
-  <meta name="description" content="Customer support, knowledge base, ticket submission, system status and training for Compatible Automotive clients.">
+  <meta name="description" content="Customer support, knowledge base, ticket submission and training for Compatible Automotive clients.">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="assets/logo-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261014w">
+  <link rel="stylesheet" href="css/styles.css?v=20261015b">
 </head>
 <body data-page="support">
 <div id="site-header"></div>
 
 <main id="main">
-  <section class="page-hero section--brand">
+  <section class="page-hero section--brand page-hero--video">
+    <!-- Background photo: still from Mixkit "Man and woman working in a call center" (4658), Mixkit free licence -->
+    <div class="hero-bg" aria-hidden="true">
+      <img class="hero-photo" src="assets/video/support-poster.jpg" alt="">
+    </div>
     <div class="container">
       <p class="breadcrumb"><a href="index.html">Home</a> / Support</p>
       <span class="eyebrow">Support centre</span>
       <h1>Need <span class="accent-text">help?</span></h1>
-      <p class="lead">Support from people who understand dealership operations. Search the knowledge base, log a ticket or check system status.</p>
+      <p class="lead">Support from people who understand dealership operations. Search the knowledge base, log a ticket or book training.</p>
       <form class="search-box" id="kbSearch" role="search">
         <input type="search" placeholder="Search the knowledge base, e.g. 'job cards'" aria-label="Search the knowledge base">
         <button class="btn btn--primary btn--sm" type="submit">Search</button>
@@ -41,30 +45,7 @@
         <a class="card card--glow reveal" href="ticket.html"><span class="ico ico--lg" data-icon="headset"></span><h3>Customer Support</h3><p>Speak to our support team about Titan DMS, CRM or digital services.</p><span class="link-arrow">Get support</span></a>
         <a class="card card--glow reveal" href="#"><span class="ico ico--lg" data-icon="book"></span><h3>Knowledge Base</h3><p>How-to articles and answers to common questions. <span class="ph">Link help centre</span></p><span class="link-arrow">Browse articles</span></a>
         <a class="card card--glow reveal" href="ticket.html"><span class="ico ico--lg" data-icon="ticket"></span><h3>Submit a Ticket</h3><p>Log an issue and track it through to resolution.</p><span class="link-arrow">Log a ticket</span></a>
-        <a class="card card--glow reveal" href="#status"><span class="ico ico--lg" data-icon="activity"></span><h3>System Status</h3><p>Live status of Compatible platforms and services.</p><span class="link-arrow">Check status</span></a>
         <a class="card card--glow reveal" href="training.html"><span class="ico ico--lg" data-icon="grad"></span><h3>Training &amp; Resources</h3><p>Book a training session for your team on any of our products, or get up to speed on new features.</p><span class="link-arrow">Book training</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Status -->
-  <section class="section" id="status">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">System status</span>
-        <h2>All systems, at a glance.</h2>
-        <p><span class="ph">Demo data. Connect to a status monitoring service</span></p>
-      </div>
-      <div class="status reveal">
-        <div class="status-head">
-          <b><span class="status-dot"></span>All systems operational</b>
-          <span style="color:var(--text-3);font-size:.88rem">90-day uptime</span>
-        </div>
-        <div class="status-row"><span>Titan DMS</span><div class="uptime" id="up1"></div><span class="pill pill--green">Operational</span></div>
-        <div class="status-row"><span>CRM &amp; Leads</span><div class="uptime" id="up2"></div><span class="pill pill--green">Operational</span></div>
-        <div class="status-row"><span>Dealer Websites</span><div class="uptime" id="up3"></div><span class="pill pill--green">Operational</span></div>
-        <div class="status-row"><span>OEM Integrations</span><div class="uptime" id="up4"></div><span class="pill pill--green">Operational</span></div>
-        <div class="status-row"><span>Image Enhancement</span><div class="uptime" id="up5"></div><span class="pill pill--green">Operational</span></div>
       </div>
     </div>
   </section>
@@ -72,14 +53,6 @@
 </main>
 
 <div id="site-footer"></div>
-<script src="js/main.js?v=20261014w"></script>
-<script>
-  // Demo uptime bars (replace with real status data)
-  ["up1", "up2", "up3", "up4", "up5"].forEach(function (id, n) {
-    var el = document.getElementById(id), html = "";
-    for (var i = 0; i < 60; i++) html += (i === 17 + n * 9 && n % 2 === 0) ? '<i class="warn"></i>' : "<i></i>";
-    el.innerHTML = html;
-  });
-</script>
+<script src="js/main.js?v=20261015b"></script>
 </body>
 </html>

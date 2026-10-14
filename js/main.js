@@ -49,6 +49,12 @@
     play: '<circle cx="12" cy="12" r="9"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/>',
     factory: '<path d="M3 21V10l6 4V10l6 4V6h3l3 3v12z"/><path d="M7 17h2M13 17h2"/>'
   };
+  /* Filled brand marks for social links */
+  const SOCIAL = {
+    linkedin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>'
+  };
+  window.CA_SOCIAL = SOCIAL;
   const icon = (name) =>
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     (P[name] || P.bolt) + "</svg>";
@@ -128,6 +134,10 @@
       <div class="footer-about">
         <a href="index.html" class="brand"><img src="assets/logo-full-white.png" alt="Compatible Automotive" width="220" height="51"></a>
         <p>Building the digital infrastructure modern dealerships run on. Proudly headquartered in Johannesburg, supporting automotive businesses across 19 African markets since 1989.</p>
+        <div class="social" aria-label="Compatible Automotive on social media">
+          <a class="social-btn" href="https://za.linkedin.com/company/compatibleautomotive" target="_blank" rel="noopener" aria-label="Compatible Automotive on LinkedIn">${SOCIAL.linkedin}</a>
+          <a class="social-btn" href="https://www.facebook.com/compatibleautomotive/" target="_blank" rel="noopener" aria-label="Compatible Automotive on Facebook">${SOCIAL.facebook}</a>
+        </div>
       </div>
       <div><h4>Solutions</h4><ul>
         <li><a href="solutions.html#dealership">Dealership Technology</a></li>
@@ -145,7 +155,7 @@
         <li><a href="insights.html">Insights</a></li>
         <li><a href="insights.html#case-studies">Case Studies</a></li>
         <li><a href="support.html">Support</a></li>
-        <li><a href="support.html#status">System Status</a></li></ul></div>
+        </ul></div>
       <div><h4>Company</h4><ul>
         <li><a href="about.html">About Us</a></li>
         <li><a href="about.html#people">Our People</a></li>
@@ -160,6 +170,9 @@
 </footer>`;
   }
   hydrateIcons();
+
+  // Fill any in-page social buttons (e.g. the Contact page) with their icons
+  document.querySelectorAll("[data-social]").forEach((a) => { a.innerHTML = SOCIAL[a.dataset.social] || ""; });
 
   /* ---------- Header behaviour ---------- */
   const header = document.getElementById("siteHeader");
@@ -340,7 +353,7 @@
   /* ---------- Hero background video ---------- */
   const heroVideo = document.getElementById("heroVideo");
   if (heroVideo) heroVideo.playbackRate = 2.25; // a little faster, more energetic
-  document.querySelectorAll(".page-video").forEach((v) => { v.playbackRate = 1.75; if (matchMedia("(prefers-reduced-motion: reduce)").matches) v.pause(); });
+  document.querySelectorAll(".page-video").forEach((v) => { v.playbackRate = v.classList.contains("page-video--steady") ? 0.85 : 1.75; if (matchMedia("(prefers-reduced-motion: reduce)").matches) v.pause(); });
   const heroPause = document.getElementById("heroPause");
   if (heroVideo && heroPause) {
     const label = heroPause.querySelector(".hero-pause-label");
