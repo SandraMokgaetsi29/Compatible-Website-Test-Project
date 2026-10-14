@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en-ZA" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open a Ticket | Compatible Automotive</title>
+  <meta name="description" content="Log a support ticket with Compatible Automotive for Titan DMS, CRM, websites, digital marketing and image enhancement.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=20261014w">
+</head>
+<body data-page="ticket">
+<div id="site-header"></div>
+
+<main id="main" class="ticket-page">
+  <div class="container ticket-wrap">
+    <header class="ticket-intro">
+      <h1>How can we help?</h1>
+      <p>Tell us what you need assistance with and our support team will help.</p>
+    </header>
+
+    <form class="ticket-card" name="support-ticket" method="POST" action="success.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="support-ticket">
+      <p hidden><label>Don't fill this in: <input name="bot-field"></label></p>
+
+      <!-- Your details -->
+      <div class="ticket-step">
+        <span class="ticket-step-ico" data-icon="user"></span>
+        <div><h2>Your details</h2><p>Let us know who you are so we can keep you updated.</p></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="tFirst">First name <span class="req">*</span></label><input id="tFirst" name="first-name" required autocomplete="given-name"></div>
+        <div class="field"><label for="tLast">Last name <span class="req">*</span></label><input id="tLast" name="last-name" required autocomplete="family-name"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="tEmail">Email address <span class="req">*</span></label><input id="tEmail" name="email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="tPhone">Contact number <span class="opt">(optional)</span></label><input id="tPhone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="tDealer">Dealership / Company <span class="req">*</span></label><input id="tDealer" name="dealership" required autocomplete="organization"></div>
+
+      <hr class="ticket-divider">
+
+      <!-- Your request -->
+      <div class="ticket-step">
+        <span class="ticket-step-ico" data-icon="file"></span>
+        <div><h2>Your request</h2><p>Tell us about the issue or request and we'll get the right person to help.</p></div>
+      </div>
+      <div class="field"><label for="tProduct">Product or service</label>
+        <select id="tProduct" name="product">
+          <option value="">Select a product or service</option>
+          <option>Titan DMS</option><option>MotorDX</option><option>Frontu</option><option>CAPE</option><option>Phyron AI</option>
+          <option>CRM &amp; Leads</option><option>Dealer Website</option><option>Digital Marketing</option><option>Other</option>
+        </select></div>
+      <div class="field"><label for="tType">Request type</label>
+        <select id="tType" name="request-type">
+          <option value="">Select a request type</option>
+          <option>Technical issue</option><option>Question or how-to</option><option>Account or access</option>
+          <option>Billing</option><option>Training</option><option>Feature request</option><option>Other</option>
+        </select></div>
+      <div class="field"><label for="tSubject">Subject</label><input id="tSubject" name="subject" placeholder="Briefly describe your request"></div>
+      <div class="field"><label for="tMsg">Tell us more</label><textarea id="tMsg" name="message" placeholder="Describe what happened and include any error message."></textarea></div>
+
+      <label class="ticket-drop" id="ticketDrop" for="tFile">
+        <span class="ticket-drop-ico" data-icon="clip"></span>
+        <span><b>Attach a screenshot or file</b><span class="ticket-drop-text">Drag and drop or <u>browse files</u></span></span>
+        <input id="tFile" name="attachment" type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt">
+      </label>
+
+      <div class="ticket-priority">
+        <label for="tPriority">Priority <span class="req">*</span></label>
+        <select id="tPriority" name="priority" required>
+          <option>Normal</option>
+          <option>Low</option>
+          <option>High</option>
+          <option>Urgent</option>
+        </select>
+      </div>
+
+      <button class="ticket-submit" type="submit">Submit support request</button>
+      <p class="ticket-note">You'll receive a confirmation email with your ticket reference.</p>
+    </form>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/main.js?v=20261014w"></script>
+<script>
+  // Pre-select the request type from the link, e.g. ticket.html?type=Training
+  (function () {
+    var t = new URLSearchParams(location.search).get("type"), sel = document.getElementById("tType");
+    if (!t || !sel) return;
+    for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text.toLowerCase() === t.toLowerCase()) { sel.selectedIndex = i; break; } }
+  })();
+  // Show the chosen file name in the attach area, and support drag and drop
+  (function () {
+    var drop = document.getElementById("ticketDrop"), input = document.getElementById("tFile"), text = drop.querySelector(".ticket-drop-text");
+    var show = function () { if (input.files.length) text.textContent = input.files[0].name; };
+    input.addEventListener("change", show);
+    ["dragenter", "dragover"].forEach(function (e) { drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add("is-over"); }); });
+    ["dragleave", "drop"].forEach(function (e) { drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove("is-over"); }); });
+    drop.addEventListener("drop", function (ev) { if (ev.dataTransfer.files.length) { input.files = ev.dataTransfer.files; show(); } });
+  })();
+</script>
+</body>
+</html>

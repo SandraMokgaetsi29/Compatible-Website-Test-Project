@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-ZA" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Training | Compatible Automotive</title>
+  <meta name="description" content="Book a training session with Compatible Automotive for DMS, CRM, Digital or Technical.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=20261014w">
+</head>
+<body data-page="training">
+<div id="site-header"></div>
+
+<main id="main" class="ticket-page">
+  <div class="container ticket-wrap">
+    <header class="ticket-intro">
+      <h1>Book a training session</h1>
+      <p>Join an upcoming session or request one for your team. It only takes a minute.</p>
+    </header>
+
+    <!-- Upcoming sessions (edit js/training-sessions.js to add or change sessions) -->
+    <section class="sessions" aria-labelledby="sessionsTitle">
+      <div class="sessions-head">
+        <div>
+          <h2 id="sessionsTitle">Upcoming sessions &amp; webinars</h2>
+          <p>Join a scheduled session, or request your own below.</p>
+        </div>
+        <div class="session-filters" role="group" aria-label="Filter by department">
+          <button type="button" class="chip on" data-dept="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-dept="DMS" aria-pressed="false">DMS</button>
+          <button type="button" class="chip" data-dept="CRM" aria-pressed="false">CRM</button>
+          <button type="button" class="chip" data-dept="Digital" aria-pressed="false">Digital</button>
+          <button type="button" class="chip" data-dept="Technical" aria-pressed="false">Technical</button>
+        </div>
+      </div>
+      <div class="session-list" id="sessionList"></div>
+    </section>
+
+    <form class="ticket-card" id="trainingForm" name="training-booking" method="POST" action="success.html" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="training-booking">
+      <input type="hidden" name="session" id="bSession" value="">
+      <p hidden><label>Don't fill this in: <input name="bot-field"></label></p>
+
+      <div class="session-picked" id="sessionPicked" hidden></div>
+
+      <div class="form-row">
+        <div class="field"><label for="bName">Full name <span class="req">*</span></label><input id="bName" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="bEmail">Email address <span class="req">*</span></label><input id="bEmail" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <div class="field"><label for="bDealer">Dealership / Company <span class="req">*</span></label><input id="bDealer" name="dealership" required autocomplete="organization"></div>
+
+      <div class="field"><label for="bNotes">What would you like training on? <span class="opt">(optional)</span></label><input id="bNotes" name="notes" placeholder="e.g. CRM basics for 5 people, any Tuesday"></div>
+
+      <button class="ticket-submit" type="submit">Request training</button>
+      <p class="ticket-note">Our team will contact you to confirm a date and time.</p>
+    </form>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/main.js?v=20261014w"></script>
+<script src="js/training-sessions.js?v=20261014w"></script>
+<script>
+  // Upcoming sessions: list them by date, filter by department, and "Book this session" fills the form
+  (function () {
+    var list = document.getElementById("sessionList");
+    var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var sessions = (window.TRAINING_SESSIONS || [])
+      .filter(function (s) { return new Date(s.date + "T00:00:00") >= today; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    var fmt = function (d) { return new Date(d + "T00:00:00").toLocaleDateString("en-ZA", { weekday: "short", day: "numeric", month: "short", year: "numeric" }); };
+
+    var render = function (dept) {
+      var shown = sessions.filter(function (s) { return dept === "all" || s.department === dept; });
+      if (!shown.length) {
+        list.innerHTML = '<p class="session-empty">No ' + (dept === "all" ? "" : esc(dept) + " ") + "sessions are scheduled right now. Request a session below and we'll arrange one for your team.</p>";
+        return;
+      }
+      list.innerHTML = shown.map(function (s, i) {
+        var d = new Date(s.date + "T00:00:00");
+        return '<article class="session">' +
+          '<div class="session-date"><b>' + d.getDate() + "</b><span>" + d.toLocaleDateString("en-ZA", { month: "short" }) + "</span></div>" +
+          '<div class="session-body">' +
+            '<div class="session-tags"><span class="session-dept">' + esc(s.department) + '</span><span class="session-type' + (s.type === "Webinar" ? " is-webinar" : "") + '">' + esc(s.type) + "</span></div>" +
+            "<h3>" + esc(s.title) + "</h3>" +
+            "<p>" + esc(s.description) + "</p>" +
+            '<ul class="session-meta"><li>' + esc(fmt(s.date)) + "</li><li>" + esc(s.time) + "</li><li>" + esc(s.format) + "</li>" +
+              (s.host ? "<li>" + esc(s.host) + "</li>" : "") + (s.spots ? "<li>" + esc(s.spots) + " places</li>" : "") + "</ul>" +
+          "</div>" +
+          '<button type="button" class="btn btn--primary btn--sm session-book" data-i="' + sessions.indexOf(s) + '">Book this session</button>' +
+        "</article>";
+      }).join("");
+    };
+
+    document.querySelector(".session-filters").addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      this.querySelectorAll(".chip").forEach(function (c) { c.classList.toggle("on", c === b); c.setAttribute("aria-pressed", c === b); });
+      render(b.dataset.dept);
+    });
+
+    list.addEventListener("click", function (e) {
+      var b = e.target.closest(".session-book"); if (!b) return;
+      var s = sessions[+b.dataset.i];
+      var label = s.title + " (" + s.department + " " + s.type.toLowerCase() + ", " + fmt(s.date) + ", " + s.time + ")";
+      document.getElementById("bSession").value = label;
+      var picked = document.getElementById("sessionPicked");
+      picked.innerHTML = "<span>You're booking:</span> <b>" + esc(label) + '</b> <button type="button" class="session-clear">Change</button>';
+      picked.hidden = false;
+      
+      document.getElementById("trainingForm").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("sessionPicked").addEventListener("click", function (e) {
+      if (!e.target.closest(".session-clear")) return;
+      document.getElementById("bSession").value = "";
+      this.hidden = true;
+      document.querySelector(".sessions").scrollIntoView({ behavior: "smooth" });
+    });
+
+    render("all");
+  })();
+
+</script>
+</body>
+</html>

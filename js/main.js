@@ -37,6 +37,7 @@
     check: '<path d="M20 6L9 17l-5-5"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
     chevron: '<path d="M9 6l6 6-6 6"/>',
+    clip: '<path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l8-8"/>',
     bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
     shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
     data: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>',
@@ -71,14 +72,13 @@
     ["solutions.html#digital", "globe", "Digital", "Websites, marketing, SEO, social and advertising"],
     ["solutions.html#customer", "users", "Customer Experience", "CRM, lead management and communication"],
     ["solutions.html#innovation", "ai", "Innovation", "AI, image enhancement, automation and data"],
-    ["solutions.html#roles", "target", "Solutions for your role", "Dealer principals, sales, marketing, aftersales, OEMs"],
     ["solutions.html#oem", "factory", "OEM integrations", "Connect your network with automotive technology"]
   ];
   const megaProducts = [
     ["products.html#modules", "cog", "Titan DMS", "One platform for your entire dealership"],
-    ["products.html#motordx", "file", "MotorDX", "Paperless deal files, from offer to sign-off"],
-    ["products.html#frontu", "wrench", "Frontu", "Field service management"],
-    ["products.html#easichat", "message", "EasiChat", "24/7 hybrid AI chat for dealerships"],
+    ["products.html#motordx", "file", "MotorDX", "Digital deal files, from OTP to handover"],
+    ["products.html#frontu", "wrench", "Frontu", "Field service for agri and service teams"],
+    ["products.html#cape", "layers", "CAPE", "Integration hub for your dealership data"],
     ["products.html#phyron", "ai", "Phyron AI", "AI vehicle imagery and video"],
     ["products.html#phyron-at-work", "image", "Phyron AI at work", "See a real before and after"]
   ];
@@ -86,7 +86,7 @@
     ["insights.html", "book", "Compatible Insights", "Articles, guides, videos and webinars"],
     ["insights.html#case-studies", "chart", "Case studies", "Real dealerships. Real results."],
     ["support.html", "headset", "Support centre", "Knowledge base, tickets and system status"],
-    ["about.html#careers", "briefcase", "Careers", "Build the future of automotive with us"]
+    ["careers.html", "briefcase", "Careers", "Build the future of automotive with us"]
   ];
   const megaHTML = (items) =>
     '<div class="mega">' +
@@ -107,10 +107,10 @@
       <div class="nav-item${active("solutions")}"><a class="nav-link" href="solutions.html"${current("solutions")}>Solutions</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Solutions menu"></button>${megaHTML(megaSolutions)}</div>
       <div class="nav-item${active("products")}"><a class="nav-link" href="products.html"${current("products")}>Products</a><button type="button" class="nav-caret" aria-expanded="false" aria-label="Show Products menu"></button>${megaHTML(megaProducts)}</div>
       <a href="about.html" class="${active("about").trim()}"${current("about")}>About Us</a>
-      <a href="about.html#careers">Careers</a>
+      <a href="careers.html" class="${active("careers").trim()}"${current("careers")}>Careers</a>
     </nav>
     <div class="header-actions">
-      <a href="support.html#ticket" class="support-link${active("support")}"${current("support")}>Open a Ticket</a>
+      <a href="ticket.html" class="support-link${active("ticket")}"${current("ticket")}>Open a Ticket</a>
       <a href="contact.html" class="btn btn--primary btn--sm">Contact Us</a>
     </div>
     <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -134,12 +134,12 @@
         <li><a href="solutions.html#digital">Digital</a></li>
         <li><a href="solutions.html#customer">Customer Experience</a></li>
         <li><a href="solutions.html#innovation">Innovation</a></li>
-        <li><a href="solutions.html#roles">Solutions for…</a></li></ul></div>
+        </ul></div>
       <div><h4>Products</h4><ul>
         <li><a href="products.html">Titan DMS</a></li>
         <li><a href="products.html#motordx">MotorDX</a></li>
         <li><a href="products.html#frontu">Frontu</a></li>
-        <li><a href="products.html#easichat">EasiChat</a></li>
+        <li><a href="products.html#cape">CAPE</a></li>
         <li><a href="products.html#phyron">Phyron</a></li></ul></div>
       <div><h4>Resources</h4><ul>
         <li><a href="insights.html">Insights</a></li>
@@ -149,7 +149,7 @@
       <div><h4>Company</h4><ul>
         <li><a href="about.html">About Us</a></li>
         <li><a href="about.html#people">Our People</a></li>
-        <li><a href="about.html#careers">Careers</a></li>
+        <li><a href="careers.html">Careers</a></li>
         <li><a href="contact.html">Contact</a></li></ul></div>
     </div>
     <div class="footer-bottom">
@@ -208,7 +208,7 @@
     const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1600, t0 = performance.now();
     const step = (t) => {
       const p = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
+      el.textContent = Math.round(target * eased).toLocaleString("en-US") + suffix;
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -218,7 +218,7 @@
       if (en.isIntersecting) { runCounter(en.target); co.unobserve(en.target); }
     }), { threshold: 0.5 });
     counters.forEach((c) => co.observe(c));
-  } else counters.forEach((c) => (c.textContent = c.dataset.count + (c.dataset.suffix || "")));
+  } else counters.forEach((c) => (c.textContent = (+c.dataset.count).toLocaleString("en-US") + (c.dataset.suffix || "")));
 
   /* ---------- Generic tabs ---------- */
   document.querySelectorAll("[data-tabs]").forEach((group) => {
