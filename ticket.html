@@ -22,87 +22,15 @@
       <p>Tell us what you need assistance with and our support team will help.</p>
     </header>
 
-    <form class="ticket-card" name="support-ticket" method="POST" action="success.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="support-ticket">
-      <p hidden><label>Don't fill this in: <input name="bot-field"></label></p>
-
-      <!-- Your details -->
-      <div class="ticket-step">
-        <span class="ticket-step-ico" data-icon="user"></span>
-        <div><h2>Your details</h2><p>Let us know who you are so we can keep you updated.</p></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="tFirst">First name <span class="req">*</span></label><input id="tFirst" name="first-name" required autocomplete="given-name"></div>
-        <div class="field"><label for="tLast">Last name <span class="req">*</span></label><input id="tLast" name="last-name" required autocomplete="family-name"></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="tEmail">Email address <span class="req">*</span></label><input id="tEmail" name="email" type="email" required autocomplete="email"></div>
-        <div class="field"><label for="tPhone">Contact number <span class="opt">(optional)</span></label><input id="tPhone" name="phone" type="tel" autocomplete="tel"></div>
-      </div>
-      <div class="field"><label for="tDealer">Dealership / Company <span class="req">*</span></label><input id="tDealer" name="dealership" required autocomplete="organization"></div>
-
-      <hr class="ticket-divider">
-
-      <!-- Your request -->
-      <div class="ticket-step">
-        <span class="ticket-step-ico" data-icon="file"></span>
-        <div><h2>Your request</h2><p>Tell us about the issue or request and we'll get the right person to help.</p></div>
-      </div>
-      <div class="field"><label for="tProduct">Product or service</label>
-        <select id="tProduct" name="product">
-          <option value="">Select a product or service</option>
-          <option>Titan DMS</option><option>MotorDX</option><option>Frontu</option><option>CAPE</option><option>Phyron AI</option>
-          <option>CRM &amp; Leads</option><option>Dealer Website</option><option>Digital Marketing</option><option>Other</option>
-        </select></div>
-      <div class="field"><label for="tType">Request type</label>
-        <select id="tType" name="request-type">
-          <option value="">Select a request type</option>
-          <option>Technical issue</option><option>Question or how-to</option><option>Account or access</option>
-          <option>Billing</option><option>Training</option><option>Feature request</option><option>Other</option>
-        </select></div>
-      <div class="field"><label for="tSubject">Subject</label><input id="tSubject" name="subject" placeholder="Briefly describe your request"></div>
-      <div class="field"><label for="tMsg">Tell us more</label><textarea id="tMsg" name="message" placeholder="Describe what happened and include any error message."></textarea></div>
-
-      <label class="ticket-drop" id="ticketDrop" for="tFile">
-        <span class="ticket-drop-ico" data-icon="clip"></span>
-        <span><b>Attach a screenshot or file</b><span class="ticket-drop-text">Drag and drop or <u>browse files</u></span></span>
-        <input id="tFile" name="attachment" type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt">
-      </label>
-
-      <div class="ticket-priority">
-        <label for="tPriority">Priority <span class="req">*</span></label>
-        <select id="tPriority" name="priority" required>
-          <option>Normal</option>
-          <option>Low</option>
-          <option>High</option>
-          <option>Urgent</option>
-        </select>
-      </div>
-
-      <button class="ticket-submit" type="submit">Submit support request</button>
-      <p class="ticket-note">You'll receive a confirmation email with your ticket reference.</p>
-    </form>
+    <div class="ticket-card">
+      <!-- HubSpot support ticket form -->
+      <div class="hs-form-frame" data-region="eu1" data-form-id="bfd9454d-6442-4ca6-9c2a-e5841b1192ba" data-portal-id="27224850"></div>
+    </div>
   </div>
 </main>
 
 <div id="site-footer"></div>
 <script src="js/main.js?v=20261015b"></script>
-<script>
-  // Pre-select the request type from the link, e.g. ticket.html?type=Training
-  (function () {
-    var t = new URLSearchParams(location.search).get("type"), sel = document.getElementById("tType");
-    if (!t || !sel) return;
-    for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text.toLowerCase() === t.toLowerCase()) { sel.selectedIndex = i; break; } }
-  })();
-  // Show the chosen file name in the attach area, and support drag and drop
-  (function () {
-    var drop = document.getElementById("ticketDrop"), input = document.getElementById("tFile"), text = drop.querySelector(".ticket-drop-text");
-    var show = function () { if (input.files.length) text.textContent = input.files[0].name; };
-    input.addEventListener("change", show);
-    ["dragenter", "dragover"].forEach(function (e) { drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add("is-over"); }); });
-    ["dragleave", "drop"].forEach(function (e) { drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove("is-over"); }); });
-    drop.addEventListener("drop", function (ev) { if (ev.dataTransfer.files.length) { input.files = ev.dataTransfer.files; show(); } });
-  })();
-</script>
+<script src="https://js-eu1.hsforms.net/forms/embed/27224850.js" defer></script>
 </body>
 </html>
