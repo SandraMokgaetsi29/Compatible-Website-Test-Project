@@ -22,38 +22,11 @@
       <p>Tell us what you need and we'll route your enquiry straight to the right team.</p>
     </header>
 
-    <form class="ticket-card" id="contactForm" name="contact" method="POST" action="success.html" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="contact">
-      <input type="hidden" name="team" value="General enquiries">
-      <p hidden><label>Don't fill this in: <input name="bot-field"></label></p>
-
-      <!-- Your details -->
-      <div class="ticket-step">
-        <span class="ticket-step-ico" data-icon="user"></span>
-        <div><h2>Your details</h2><p>Let us know who you are so we can get back to you.</p></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="cFirst">First name <span class="req">*</span></label><input id="cFirst" name="first-name" required autocomplete="given-name"></div>
-        <div class="field"><label for="cLast">Last name <span class="req">*</span></label><input id="cLast" name="last-name" required autocomplete="family-name"></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="cEmail">Email address <span class="req">*</span></label><input id="cEmail" name="email" type="email" required autocomplete="email"></div>
-        <div class="field"><label for="cPhone">Contact number <span class="opt">(optional)</span></label><input id="cPhone" name="phone" type="tel" autocomplete="tel"></div>
-      </div>
-      <div class="field"><label for="cDealer">Dealership / Company <span class="req">*</span></label><input id="cDealer" name="dealership" required autocomplete="organization"></div>
-
-      <hr class="ticket-divider">
-
-      <!-- Your enquiry -->
-      <div class="ticket-step">
-        <span class="ticket-step-ico" data-icon="message"></span>
-        <div><h2>Your enquiry</h2><p>Tell us what you'd like to talk about and we'll connect you with the right person.</p></div>
-      </div>
-      <div class="field"><label for="cMsg">Message <span class="req">*</span></label><textarea id="cMsg" name="message" required placeholder="How can we help?"></textarea></div>
-
-      <button class="ticket-submit" type="submit">Send enquiry</button>
+    <div class="ticket-card">
+      <!-- HubSpot contact form -->
+      <div class="hs-form-frame" data-region="eu1" data-form-id="bfd9454d-6442-4ca6-9c2a-e5841b1192ba" data-portal-id="27224850"></div>
       <p class="ticket-note">Need help with a product you already use? <a href="ticket.html">Open a support ticket</a> instead.</p>
-    </form>
+    </div>
 
     <!-- Other ways to reach us -->
     <div class="contact-ways">
@@ -84,5 +57,6 @@
 
 <div id="site-footer"></div>
 <script src="js/main.js?v=20261015b"></script>
+<script src="https://js-eu1.hsforms.net/forms/embed/27224850.js" defer></script>
 </body>
 </html>

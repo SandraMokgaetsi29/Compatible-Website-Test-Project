@@ -21,16 +21,25 @@
       <h1>How can we help?</h1>
       <p>Tell us what you need assistance with and our support team will help.</p>
     </header>
-
     <div class="ticket-card">
-      <!-- HubSpot support ticket form -->
-      <div class="hs-form-frame" data-region="eu1" data-form-id="bfd9454d-6442-4ca6-9c2a-e5841b1192ba" data-portal-id="27224850"></div>
+      <!-- Teamwork Desk support ticket form -->
+      <iframe id="deskcontactwidgetframe" src="https://compatibleautomotive1.teamwork.com/support/contactform.html?token=b78f8b24-cb9c-11f1-a3fb-8e0054b5aa9b" title="Open a support ticket" width="100%" height="600" frameborder="0" style="display:block; border:0;"></iframe>
     </div>
   </div>
 </main>
 
 <div id="site-footer"></div>
 <script src="js/main.js?v=20261015b"></script>
-<script src="https://js-eu1.hsforms.net/forms/embed/27224850.js" defer></script>
+<script>
+  // Teamwork Desk form shown inline: open it once ready and size the frame to fit its content
+  (function () {
+    var frame = document.getElementById("deskcontactwidgetframe");
+    window.addEventListener("message", function (e) {
+      var d = e.data || {};
+      if (d.type === "tw-contact-form-is-ready") frame.contentWindow.postMessage({ type: "tw-contact-form-toggle-widget", value: true }, "*");
+      if (d[0] === "setContactFormHeight") frame.height = d[1];
+    }, false);
+  })();
+</script>
 </body>
 </html>
